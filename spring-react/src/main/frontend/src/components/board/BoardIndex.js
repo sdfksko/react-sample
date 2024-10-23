@@ -190,7 +190,6 @@ function BoardIndex() {
     const[pageNumber, setPageNumber] = useState(0);
     const[currentPageList, setCurrentPageList] = useState([]);
 
-
     useEffect(() => {
         axios.get('http://localhost:9000/boardData')
         .then(function (response) {
@@ -263,6 +262,7 @@ function BoardIndex() {
             });
         }
     }
+
     function lastPage() {
         if(searching == false) {
             axios.get('http://localhost:9000/boardData?page=' + (totalPages - 1))

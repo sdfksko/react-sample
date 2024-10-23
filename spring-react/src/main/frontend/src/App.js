@@ -1,3 +1,4 @@
+import MainPage from './pages/MainPage.js';
 import LoginPage from './pages/loginPages/LoginPage.js';
 import JoinPage from './pages/loginPages/JoinPage.js';
 import SearchIdPage from './pages/loginPages/SearchIdPage.js';
@@ -6,7 +7,7 @@ import BoardIndexPage from './pages/boardPages/BoardIndexPage.js';
 import BoardNewPage from './pages/boardPages/BoardNewPage.js';
 import BoardShowPage from './pages/boardPages/BoardShowPage.js';
 import BoardEditPage from './pages/boardPages/BoardEditPage.js';
-import MainPage from './pages/MainPage.js';
+import CenterPage from './pages/centerPages/CenterPage.js';
 import AdminPage from './pages/adminPages/AdminPage.js';
 import AdminMemberPage from './pages/adminPages/AdminMemberPage.js';
 import AdminBoardPage from './pages/adminPages/AdminBoardPage.js';
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <Routes>
+        <Route path="/" exact={true} element={<MainPage />} />
         <Route path="/loginForm" exact={true} element={<LoginPage />} />
         <Route path="/joinForm" exact={true} element={<JoinPage />} />
         <Route path="/sms/search/id" exact={true} element={<SearchIdPage />} />
@@ -26,7 +28,7 @@ function App() {
         <Route path="/board/new" exact={true} element={<BoardNewPage />} />
         <Route path="/board/show" exact={true} element={<BoardShowPage />} />
         <Route path="/board/edit" exact={true} element={<BoardEditPage />} />
-        <Route path="/" exact={true} element={<MainPage />} />
+        <Route path="/center" exact={true} element={<CenterPage />} />
         <Route path="/admin" exact={true} element={<AdminPage />} />
         <Route path="/admin/members" exact={true} element={<AdminMemberPage />} />
         <Route path="/admin/boards" exact={true} element={<AdminBoardPage />} />

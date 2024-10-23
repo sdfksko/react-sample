@@ -404,7 +404,7 @@ function Header() {
                             </div>
                             <ul className="sub-menu">
                                 <li><Link to="/board" className="link">자유게시판</Link></li>
-                                <li><Link to="#" className="link">고객센터</Link></li>
+                                <li><Link to="/center" className="link">고객센터</Link></li>
                                 <li><p className="link" onClick={moveAdmin}>관리자 페이지</p></li>
                             </ul>
                         </div>

@@ -33,4 +33,20 @@ public class ReactNoticeRestService {
 
         return noticeBoard;
     }
+
+    public NoticeBoard addReadCount(NoticeDTO noticeDTO) {
+        NoticeBoard noticeBoard = noticeRepository.findById(noticeDTO.getId()).orElse(null);
+
+        NoticeDTO clone = new NoticeDTO();
+
+        clone.setReadCount(noticeBoard.getReadCount() + 1);
+
+        NoticeBoard target = clone.createNoticeBoard(clone);
+
+        noticeBoard.update(target);
+
+        noticeRepository.save(noticeBoard);
+
+        return noticeBoard;
+    }
 }

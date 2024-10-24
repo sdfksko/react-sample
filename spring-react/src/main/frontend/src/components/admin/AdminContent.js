@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import {useState, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import styled from 'styled-components'
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 
 const StyledAdminDiv = styled.div`
@@ -9,26 +9,13 @@ const StyledAdminDiv = styled.div`
         top: 10px;
         cursor: pointer;
     }
-
-    .action-buttons {
-        display: flex;
-        gap: 10px;
-    }
-
-    .table th, .table td {
-        vertical-align: middle;
-    }
-
-    #parentCategorySelect {
-        width: 250px;
-    }
 `;
 
-function AdminCategory() {
+function AdminContent() {
 
     const navigate = useNavigate();
 
-    const[categories, setCategories] = useState([]);
+    const[contents, setContents] = useState([]);
     const[totalPages, setTotalPages] = useState();
     const[pageNumber, setPageNumber] = useState();
     const[firstPage, setFirstPage] = useState(0);
@@ -40,17 +27,17 @@ function AdminCategory() {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:9000/categoryData")
+        axios.get("http://localhost:9000/nestCoData")
         .then(function(response) {
-            console.log(response.data);
-            setCategories(response.data.content);
+            console.log(response)
+            setContents(response.data.content);
             setTotalPages(response.data.totalPages);
             setPageNumber(response.data.pageable.pageNumber);
         })
         .catch(function(error) {
             alert('데이터 조회 실패');
         });
-    }, []);
+    }, [])
 
     useEffect(() => {
         const pages = [];
@@ -64,72 +51,72 @@ function AdminCategory() {
     }, [totalPages])
 
     function first() {
-        axios.get("http://localhost:9000/categoryData?page=" + firstPage)
+        axios.get("http://localhost:9000/nestCoData?page=" + firstPage)
         .then(function(response) {
-            setCategories(response.data.content);
+            setContents(response.data.content);
             setPageNumber(response.data.pageable.pageNumber);
         })
-        .catch(function(response) {
+        .catch(function(error) {
             alert('데이터 조회 실패');
-        });
+        })
     }
 
     function last() {
-        axios.get("http://localhost:9000/categoryData?page=" + (totalPages - 1))
+        axios.get("http://localhost:9000/nestCoData?page=" + (totalPages - 1))
         .then(function(response) {
-            setCategories(response.data.content);
+            setContents(response.data.content);
             setPageNumber(response.data.pageable.pageNumber);
         })
-        .catch(function(response) {
+        .catch(function(error) {
             alert('데이터 조회 실패');
-        });
+        })
     }
 
     function prev() {
-        axios.get("http://localhost:9000/categoryData?page=" + (pageNumber - 1))
+        axios.get("http://localhost:9000/nestCoData?page=" + (pageNumber - 1))
         .then(function(response) {
-            setCategories(response.data.content);
+            setContents(response.data.content);
             setPageNumber(response.data.pageable.pageNumber);
         })
-        .catch(function(response) {
+        .catch(function(error) {
             alert('데이터 조회 실패');
-        });
+        })
     }
 
     function next() {
-        axios.get("http://localhost:9000/categoryData?page=" + (pageNumber + 1))
+        axios.get("http://localhost:9000/nestCoData?page=" + (pageNumber + 1))
         .then(function(response) {
-            setCategories(response.data.content);
+            setContents(response.data.content);
             setPageNumber(response.data.pageable.pageNumber);
         })
-        .catch(function(response) {
+        .catch(function(error) {
             alert('데이터 조회 실패');
-        });
+        })
     }
 
     function current(currentPage) {
-        axios.get("http://localhost:9000/categoryData?page=" + (currentPage - 1))
+        axios.get("http://localhost:9000/nestCoData?page=" + (currentPage - 1))
         .then(function(response) {
-            setCategories(response.data.content);
+            setContents(response.data.content);
             setPageNumber(response.data.pageable.pageNumber);
         })
-        .catch(function(response) {
+        .catch(function(error) {
             alert('데이터 조회 실패');
-        });
+        })
     }
 
     return(
         <StyledAdminDiv>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
-                    <Link to="/admin" className="navbar-brand">Admin Dashboard</Link>
+                    <a className="navbar-brand" href="#">Admin Dashboard</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
-                                <p id="logout-btn" className="nav-link" onClick={logout}>로그아웃</p>
+                                <p id="logout-btn" onClick={logout} className="nav-link">로그아웃</p>
                             </li>
                         </ul>
                     </div>
@@ -141,69 +128,55 @@ function AdminCategory() {
                         <div className="position-sticky pt-3">
                             <ul className="nav flex-column">
                                 <li className="nav-item">
-                                    <a className="nav-link active" href="/admin">대시보드</a>
+                                    <Link to="/admin" className="nav-link active">대시보드</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/admin/members">회원 관리</a>
+                                    <Link to="/admin/members" className="nav-link">회원 관리</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/admin/contents">콘텐츠 관리</a>
+                                    <Link to="/admin/contents" className="nav-link">콘텐츠 관리</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/admin/boards">게시글 관리</a>
+                                    <Link to="/admin/boards" className="nav-link">게시글 관리</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/admin/notices">공지사항 관리</a>
+                                    <Link to="/admin/notices" className="nav-link">공지사항 관리</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/admin/categories">카테고리 관리</a>
+                                    <Link to="/admin/categories" className="nav-link">카테고리 관리</Link>
                                 </li>
                             </ul>
                         </div>
                     </nav>
                     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                        <br></br>
-                        <h1 className="mb-4">카테고리 관리</h1>
-                        <div className="d-flex justify-content-between align-items-center mb-4">
-                            <div className="d-flex align-items-center">
-                                <label for="parentCategorySelect" className="form-label me-2">카테고리 관리</label>
-                                <select id="parentCategorySelect" className="form-select me-2">
-                                    <option value="all">전체 카테고리</option>
-                                    {categories.map((category) => (
-                                    <option value="id">{category.name}</option>
-                                    ))}
-                                </select>
-                                <button className="btn btn-secondary">검색</button>
-                            </div>
-                            <div>
-                                <button className="btn btn-primary">카테고리 생성</button>
-                            </div>
-                        </div>
-                        <table className="table table-striped" id="categoryTable">
+                        <br></br><br></br>
+                        <h1>콘텐츠 관리</h1>
+                        <form action="/admin/contents" method="GET" className="input-group mt-3 mb-3">
+                            <input type="text" name="searchKey" className="form-control" placeholder="검색어를 입력하세요..." aria-label="검색어 입력" aria-describedby="button-addon2" />
+                            <button className="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
+                        </form>
+                        <table className="table">
                             <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>대분류</th>
-                                <th>중분류</th>
-                                <th>소분류</th>
-                                <th>노출 여부</th>
-                                <th>순서</th>
+                                <th>콘텐츠 ID</th>
+                                <th>제목</th>
+                                <th>카테고리</th>
+                                <th>회원 정보</th>
+                                <th>등록일</th>
                                 <th>액션</th>
                             </tr>
                             </thead>
                             <tbody>
-                                {categories.map((category) => (
-                                <tr className="category-row" data-category="top" data-id="id"  data-parent-id="">
-                                    <td>{category.id}</td>
-                                    <td>{category.name}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><span className="badge bg-danger">No</span><span className="badge bg-success">Yes</span></td>
-                                    <td>{category.dispalyOreder}</td>
+                                {contents.map((content) => (
+                                <tr>
+                                    <td>{content.id}</td>
+                                    <td>{content.title}</td>
+                                    <td>{content.category.name}</td>
+                                    <td><a href="/admin/users/{{ uploader }}" className="btn btn-info btn-sm">{content.uploader.nickname}</a></td>
+                                    <td>{content.createDate}</td>
                                     <td>
-                                        <a href="/admin/categories/edit/id" className="btn btn-warning btn-sm">수정</a>
-                                        <form action="/admin/categories/delete/id" method="POST" className="d-inline">
-                                            <button type="submit" className="btn btn-danger btn-sm">삭제</button>
+                                        <form action="/admin/contents/delete/{{ id }}" method="POST">
+                                            <button type="submit" class="btn btn-danger btn-sm">삭제</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -212,13 +185,13 @@ function AdminCategory() {
                         </table>
                         <nav aria-label="...">
                           <ul className="pagination">
-                            {pageNumber != 0 ? (
+                            {pageNumber != firstPage ? (
                             <>
                             <li className="page-item">
                                 <p className="page-link" onClick={first}>First</p>
                             </li>
                             <li className="page-item">
-                              <p className="page-link" onClick={prev}>Previous</p>
+                              <p className="page-link" onClick={prev}>Prev</p>
                             </li>
                             </>
                             ): null}
@@ -227,7 +200,7 @@ function AdminCategory() {
                               <p className="page-link" onClick={() => current(currentPage)}>{currentPage}</p>
                             </li>
                             ))}
-                            {pageNumber != (totalPages -1) ? (
+                            {pageNumber != (totalPages - 1) ? (
                             <>
                             <li className="page-item">
                               <p className="page-link" onClick={next}>Next</p>
@@ -246,4 +219,4 @@ function AdminCategory() {
     )
 }
 
-export default AdminCategory;
+export default AdminContent;

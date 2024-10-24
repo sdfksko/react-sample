@@ -341,6 +341,10 @@ function Header() {
         }
     }
 
+    function moveMyPage() {
+        navigate("/myPage");
+    }
+
     return(
         <StyledHeader>
             <div className="header-wrapper">
@@ -387,8 +391,8 @@ function Header() {
                                 <div class="dropdown">
                                     <button id="userDropdown" className="dropbtn">{userData.nickname}</button>
                                     <div className="dropdown-content">
-                                        <div to="/myPage">마이페이지</div>
-                                        <div to="/logout" onClick={logout}>로그아웃</div>
+                                        <div onClick={moveMyPage}>마이페이지</div>
+                                        <div onClick={logout}>로그아웃</div>
                                     </div>
                                 </div>
                                 ) : (

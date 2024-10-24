@@ -18,7 +18,7 @@ public class ReactCategoryRestController {
     @Autowired
     private ReactCategoryRestService reactCategoryRestService;
 
-    @GetMapping("categoryData")
+    @GetMapping("/categoryData")
     public ResponseEntity<Page<Category>> categoryData(@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
 
         Page<Category> categoryPage = reactCategoryRestService.creatCategoryPage(pageable);
@@ -26,6 +26,12 @@ public class ReactCategoryRestController {
         if(categoryPage == null) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
+
+        for(Category category : categoryPage) {
+            category.setChildren(null);
+            category.setParent(null);
+        }
+
         return ResponseEntity.ok(categoryPage);
     }
 }

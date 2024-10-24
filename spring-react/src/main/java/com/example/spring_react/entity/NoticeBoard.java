@@ -40,4 +40,10 @@ public class NoticeBoard {
         this.createDate = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
+    public void update(NoticeBoard noticeBoard) {
+        if(noticeBoard.getReadCount() != null) {
+            this.readCount = noticeBoard.getReadCount();
+        }
+    }
+
 }

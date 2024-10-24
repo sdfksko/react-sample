@@ -49,4 +49,18 @@ public class ReactNoticeRestController {
 
         return ResponseEntity.ok("데이터 삭제 성공");
     }
+
+    @PostMapping("/noticeData/readCount")
+    public ResponseEntity<String> noticeReadCountAdd(@RequestBody NoticeDTO noticeDTO) {
+
+        System.out.println(noticeDTO.getId());
+
+        NoticeBoard noticeBoard = reactNoticeRestService.addReadCount(noticeDTO);
+
+        if(noticeBoard == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("에러");
+        }
+
+        return ResponseEntity.ok("조회수 증가");
+    }
 }

@@ -130,6 +130,29 @@ function Center() {
 
     const userData = JSON.parse(sessionStorage.getItem("userData"));
 
+    const navigate = useNavigate();
+
+    function moveNotice() {
+        navigate("/center/notices")
+    }
+
+    function moveOneOnOne() {
+        if(userData == null) {
+            alert('로그인이 필요합니다.');
+        } else {
+            navigate("/center/oneonone");
+        }
+    }
+
+    function moveEvent() {
+        if(userData == null) {
+            alert('로그인이 필요합니다.');
+        } else {
+            navigate("/center/event");
+        }
+    }
+
+
     return(
         <StyledDiv>
             <div className="service-center">
@@ -142,7 +165,7 @@ function Center() {
                     </div>
                     <h2>1:1문의</h2>
                     <p>회원 여러분에게 답변해 드립니다.</p>
-                    <button className="btn">1:1문의 ></button>
+                    <button className="btn" onClick={moveOneOnOne} >1:1문의 ></button>
                 </div>
 
                 <div className="section2">
@@ -151,7 +174,7 @@ function Center() {
                     </div>
                     <h2>공지사항</h2>
                     <p>회원 여러분에게 알려드립니다.</p>
-                    <button className="btn">공지사항 ></button>
+                    <button className="btn" onClick={moveNotice}>공지사항 ></button>
                 </div>
 
                 <div className="section3">
@@ -160,7 +183,7 @@ function Center() {
                     </div>
                     <h2>이벤트</h2>
                     <p>회원 여러분에게 드립니다.</p>
-                    <button className="btn" >이벤트 ></button>
+                    <button className="btn" onClick={moveEvent}>이벤트 ></button>
                 </div>
             </div>
                <br></br>

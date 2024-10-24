@@ -145,11 +145,7 @@ function Center() {
     }
 
     function moveEvent() {
-        if(userData == null) {
-            alert('로그인이 필요합니다.');
-        } else {
-            navigate("/center/event");
-        }
+        navigate("/center/event");
     }
 
 

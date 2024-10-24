@@ -5,6 +5,7 @@ import com.example.spring_react.service.ReactRestService;
 import com.example.spring_react.dto.MemberDTO;
 import com.example.spring_react.entity.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +40,18 @@ public class ReactRestController {
         loginResponseDTO.setMessage("로그인 성공");
 
         return ResponseEntity.ok(loginResponseDTO);
+    }
+
+    @PostMapping("react/join")
+    public ResponseEntity<String> reactJoin(@RequestBody MemberDTO memberDTO) {
+        System.out.println(memberDTO.getAddress());
+
+        String result = reactRestService.memberCheck(memberDTO);
+
+        if(result == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+
+        return ResponseEntity.ok(result);
     }
 }

@@ -7,7 +7,6 @@ import googleLogo from '../../images/google.png';
 import kakaoLogo from '../../images/kakao.png';
 import naverLogo from '../../images/naver.png';
 
-
 const StyledLoginMain = styled.main`
     * {
         margin: 0px;

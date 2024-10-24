@@ -59,13 +59,17 @@ function CenterEvent() {
     }
 
     function eventJoin() {
-        axios.post("http://localhost:9000/event/join", {memberDTO: userData})
-        .then(function(response) {
-            console.log(response.data);
-        })
-        .catch(function(error) {
+        if(userData == null) {
+            alert('로그인이 필요합니다.');
+        } else {
+            axios.post("http://localhost:9000/event/join", {memberDTO: userData})
+            .then(function(response) {
+                alert(response.data);
+            })
+            .catch(function(error) {
 
-        });
+            });
+        }
     }
 
     return(

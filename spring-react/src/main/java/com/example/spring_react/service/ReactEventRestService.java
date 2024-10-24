@@ -25,7 +25,7 @@ public class ReactEventRestService {
 
         Member member = memberDTO.createMemberEntity(memberDTO);
 
-        UserEvent userEvent = userEventRepository.findByMember(member);
+        UserEvent userEvent = userEventRepository.findByMemberId(member);
 
         if(userEvent == null) {
             Random random = new Random();
@@ -52,5 +52,7 @@ public class ReactEventRestService {
         if(userEvent.getEventJoin().equals("참여")) {
             return "이미 이벤트에 참여하셨습니다.";
         }
+
+        return null;
     }
 }

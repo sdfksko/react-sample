@@ -20,7 +20,7 @@ public class ReactEventRestController {
 
         String result = reactEventRestService.checkUser(eventRequestDTO);
 
-        return ResponseEntity.ok("하이");
+        return ResponseEntity.ok(result);
     }
 
 }
